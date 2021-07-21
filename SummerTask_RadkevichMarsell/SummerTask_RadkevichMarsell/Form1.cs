@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SummerTask_RadkevichMarsell.fileReading;
 
 namespace SummerTask_RadkevichMarsell
 {
@@ -15,6 +17,41 @@ namespace SummerTask_RadkevichMarsell
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button_ChooseFiles_Click(object sender, EventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = true;
+            fileDialog.RestoreDirectory = true;
+            fileDialog.Filter = "Текстовые файлы (*.txt, *.cs)|*.txt;*.cs";
+            
+            var listings = new List<Listing>();
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)          
+                listings = ReadSelectedFiles(fileDialog.FileNames);              
+            
+        }
+        
+        private List<Listing> ReadSelectedFiles(string[] selectedFiles)
+        {
+            var listings = new List<Listing>();
+            foreach (string file in selectedFiles)
+            {
+                var content = new List<string>();
+                using (StreamReader reader = new StreamReader(file, Encoding.UTF8))
+                {
+                    string line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        content.Add(line);
+                        line = reader.ReadLine();
+                    }
+                    listings.Add(new Listing(file, content));
+                }
+            }
+
+            return listings;
         }
     }
 }
