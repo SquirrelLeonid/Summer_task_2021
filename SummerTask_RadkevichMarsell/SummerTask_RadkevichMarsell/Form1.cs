@@ -28,11 +28,23 @@ namespace SummerTask_RadkevichMarsell
             
             var listings = new List<Listing>();
 
-            if (fileDialog.ShowDialog() == DialogResult.OK)          
-                listings = ReadSelectedFiles(fileDialog.FileNames);              
-            
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+                TB_ChoosedFiles.Lines = fileDialog.FileNames;      
         }
-        
+
+        private void Btn_CreateScheme_Click(object sender, EventArgs e)
+        {
+            var listings = ReadSelectedFiles(TB_ChoosedFiles.Lines);
+            LineParser parser = new LineParser();
+            var methods = parser.ParseListings(listings);
+
+            foreach (MethodRecord record in methods)
+            {
+                TB_Methods.Text += record.Name;
+                TB_Methods.Text += "\r\n";
+            }
+        }
+
         private List<Listing> ReadSelectedFiles(string[] selectedFiles)
         {
             var listings = new List<Listing>();
@@ -53,5 +65,7 @@ namespace SummerTask_RadkevichMarsell
 
             return listings;
         }
+
+        
     }
 }
