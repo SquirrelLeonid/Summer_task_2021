@@ -77,6 +77,7 @@ namespace SummerTask_RadkevichMarsell
             this.TB_Methods.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TB_Methods.Size = new System.Drawing.Size(423, 278);
             this.TB_Methods.TabIndex = 3;
+            this.TB_Methods.WordWrap = false;
             // 
             // Form1
             // 
