@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SummerTask_RadkevichMarsell
 {
-    class MethodRecord
+    public class MethodRecord
     {
         public string Name { get; }
         public List<string> Body { get; }

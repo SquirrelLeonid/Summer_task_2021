@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SummerTask_RadkevichMarsell
 {
-    class LineParser
+    public class LineParser
     {
+        private string currentNamespaceName;
+        private string currentClassName;
+        private string currentMethodName;
         public List<MethodRecord> ParseListings(List<Listing> listings)
         {
             var methods = new List<MethodRecord>();
@@ -17,54 +19,81 @@ namespace SummerTask_RadkevichMarsell
 
             foreach (var listing in listings)
             {
+                currentNamespaceName = "";
+                currentClassName = "";
                 var methodFullName = new StringBuilder();
-                foreach (var line in listing.Content)
+                for (int i = 0; i < listing.Content.Count; i++)
                 {
-                    if (line.Contains("namespace"))
+                    string line = listing.Content[i];
+
+                    if (line.Contains("namespace "))
                     {
-                        var namespaceSplit = line.Split();
-                        var namespaceName = namespaceSplit[1];
-                        methodFullName.Append(namespaceName).Append("\\");
+                        var namespaceSplit = line.Split(new []{ ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        currentNamespaceName = namespaceSplit[1] + "\\";
                         continue;
                     }
 
-                    if (line.Contains("class"))
+                    if (line.Contains(" class "))
                     {
                         var classNameSplit = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        var className = classNameSplit[classNameSplit.Length - 1];
-                        methodFullName.Append(className).Append("\\");
+                        currentClassName += classNameSplit[classNameSplit.Length - 1] + "\\";
                         continue;
                     }
 
                     if (IsMethodDeclaration(line))
                     {
-                        string[] methodNameSplit = line.Split(new[] { '(' }, StringSplitOptions.RemoveEmptyEntries);
-                        methodNameSplit = methodNameSplit[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] methodDeclarationSplit = line.Split(new[] { '(' }, StringSplitOptions.RemoveEmptyEntries);
+                        string methodDeclarationLeftSide = methodDeclarationSplit[0];
+                        string[] splitBeforeMethodArguments = methodDeclarationLeftSide.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        currentMethodName = splitBeforeMethodArguments[splitBeforeMethodArguments.Length - 1];
 
-                        string methodName = methodNameSplit[methodNameSplit.Length - 1];
-                        methodFullName.Append(methodName);
+                        methodFullName.Append(currentNamespaceName).Append(currentClassName).Append(currentMethodName);
+
+                        var methodBody = new List<string>();
+
+                        var figureBracketsCount = 0;
+                        i++;
+
+                        while (true)
+                        {
+                            line = listing.Content[i];
+
+                            if (line.Contains("{"))
+                                figureBracketsCount++;
+                            if (line.Contains("}"))
+                                figureBracketsCount--;
+
+                            methodBody.Add(line);
+                            i++;
+                            if (figureBracketsCount == 0)
+                                break;
+                        }
+
+                        methods.Add(new MethodRecord(methodFullName.ToString(), methodBody));
+                        methodFullName.Clear();
                     }              
                 }
-
-                methods.Add(new MethodRecord(methodFullName.ToString(), null));
             }
             return methods;
         }
 
-        private bool IsClassDeclaration(string line)
-        {
-            if (line.Contains('"'))
-                return false;
-
-            //Шаблон для поиска ключевого слова class
-            string pattern = @"\s+class\s+";
-            return Regex.IsMatch(line, pattern);
-        }
         private bool IsMethodDeclaration(string line)
         {
+            //Шаблон для поиска ключевого слова void
+            string pattern = @"\s+void\s+";
+            if (Regex.IsMatch(line, pattern))
+                return true;
+
+            //Шаблон для поиска объявления метода (с аргументами или без)
+            //Пример: public static <T> TestMethod([args])
+            //Где на месте [args] может быть любое количество аргументов, в том числе 0
+            pattern = @"\s*\(.*\)$";
+            if (Regex.IsMatch(line, pattern))
+                return true;
+
             //Шаблон на проверку того, что строка начинается с кавычки
             //Например " public static void main()"
-            string pattern = @"^\s+\""+\s+";
+            pattern = @"^\s+\""+\s+";
             if (Regex.IsMatch(line, pattern))
                 return false;
 
@@ -100,20 +129,8 @@ namespace SummerTask_RadkevichMarsell
             pattern = @"^\s*var [_*|\w*]*\s*=\s*";
             if (Regex.Matches(line, pattern).Count != 0)
                 return false;
-
-            //Шаблон для поиска объявления метода (с аргументами или без)
-            //Пример: public static <T> TestMethod([args])
-            //Где на месте [args] может быть любое количество аргументов, в том числе 0
-            pattern = @"\s*\(.*\)$";
-            if (!Regex.IsMatch(line, pattern))
-                return false;
-
-            //Шаблон для поиска ключевого слова void
-            pattern = @"\s+void\s+";
-            if (Regex.IsMatch(line, pattern))
-                return true;
-
-            return true;
+           
+            return false;
         }
     }
 }
