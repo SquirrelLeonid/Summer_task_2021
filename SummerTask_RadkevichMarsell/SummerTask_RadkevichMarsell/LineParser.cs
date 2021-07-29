@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace SummerTask_RadkevichMarsell
 {
-    class LineParser
+    public class LineParser
     {
         private string currentNamespaceName;
         private string currentClassName;
@@ -26,14 +26,14 @@ namespace SummerTask_RadkevichMarsell
                 {
                     string line = listing.Content[i];
 
-                    if (line.Contains("namespace"))
+                    if (line.Contains("namespace "))
                     {
                         var namespaceSplit = line.Split(new []{ ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         currentNamespaceName = namespaceSplit[1] + "\\";
                         continue;
                     }
 
-                    if (line.Contains("class"))
+                    if (line.Contains(" class "))
                     {
                         var classNameSplit = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                         currentClassName += classNameSplit[classNameSplit.Length - 1] + "\\";

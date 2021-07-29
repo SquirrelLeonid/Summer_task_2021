@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SummerTask_RadkevichMarsell.fileReading
 {
-    class Listing
+    public class Listing
     {
         public string Name { get; }
         public List<string> Content { get; }
