@@ -25,8 +25,6 @@ namespace SummerTask_RadkevichMarsell
             fileDialog.Multiselect = true;
             fileDialog.RestoreDirectory = true;
             fileDialog.Filter = "Текстовые файлы (*.txt, *.cs)|*.txt;*.cs";
-            
-            var listings = new List<Listing>();
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
                 TB_ChoosedFiles.Lines = fileDialog.FileNames;      
