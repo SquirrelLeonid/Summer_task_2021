@@ -41,6 +41,9 @@ namespace SummerTask_RadkevichMarsell
                 TB_Methods.Text += record.Name;
                 TB_Methods.Text += "\r\n";
             }
+
+            var tagPlacementor = new TagPlacementor();
+            methods = tagPlacementor.PlacementTags(methods);
         }
 
         private List<Listing> ReadSelectedFiles(string[] selectedFiles)
