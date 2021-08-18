@@ -4,72 +4,90 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using SummerTask_RadkevichMarsell.tokens;
 
 namespace SummerTask_RadkevichMarsell
 {
     public class TagPlacementor
     {
-        public List<MethodRecord> PlacementTags(List<MethodRecord> methods)
+        private int openBracketsCount = 0;
+        public Dictionary<string, List<TokenRecord>> PlacementTags(List<MethodRecord> methods)
         {
+            var tokenizedMethods = new Dictionary<string, List<TokenRecord>>();
 
             foreach (var method in methods)
             {
+                var methodTokens = new List<TokenRecord>();
                 for (int i = 0; i < method.Body.Count; i++)
                 {
                     var line = method.Body[i];
 
-                    //Проверка на цикл фор
-                    if (Regex.IsMatch(line, @"\s+for\s*\("))
-                    {
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
 
+                    else if (Regex.IsMatch(line, @"^\s*\{\s*$"))
+                    {
+                        openBracketsCount++;
+                        continue;
                     }
 
-                    //Проверка на условие if
-                    else if (Regex.IsMatch(line, @"\s+if\s*\("))
+                    else if (Regex.IsMatch(line, @"^\s*\}\s*$"))
                     {
+                        openBracketsCount--;
+                        continue;
+                    }
 
+                    //Проверка на цикл фор               
+                    else if (Regex.IsMatch(line, @"^\s+for\s*\(.*;.*;.*\)$"))
+                    {
+                        var match = Regex.Match(line, @"\s*\(.*;.*;.*\)$");
+                        methodTokens.Add(
+                            new TokenRecord(TokenType.ForStatement, match.Value.Trim(), openBracketsCount));
+                        continue;
+                    }
+
+                    //Проверка на while
+                    else if (Regex.IsMatch(line, @"^\s+while\s*\(.*\)$"))
+                    {
+                        var match = Regex.Match(line, @"\s*\(.*\)$");
+                        methodTokens.Add(
+                            new TokenRecord(TokenType.WhileStatement, match.Value.Trim(), openBracketsCount));
+                        continue;
+                    }
+
+                    //Проверка на if
+                    else if (Regex.IsMatch(line, @"^\s+if\s*\(.*\)$"))
+                    {
+                        var match = Regex.Match(line, @"\s*\(.*\)$");
+                        methodTokens.Add(
+                            new TokenRecord(TokenType.IfElseBranch, match.Value.Trim(), openBracketsCount));
+                        continue;
                     }
 
                     //Проверка на else
                     //Не обсудил как обрабатывать конструкцию if else-if
-                    else if (Regex.IsMatch(line, @"\s+else\s*"))
-                    {
-
-                    }
-
-                    //Проверка на while
-                    else if (Regex.IsMatch(line, @"\s+while\s*\("))
-                    {
-
+                    /*else if (Regex.IsMatch(line, @"^\s+else\s*$"))
+                    {                      
+                        continue;
                     }
 
                     //Проверка на do
                     else if (Regex.IsMatch(line, @"\s+do\s*"))
                     {
-
-                    }
-
-                    //Проверка на {
-                    else if (Regex.IsMatch(line, @"\s+\{\s*$"))
-                    {
-                        method.Body.Insert(i+1, "<body>");
-                        i++;
-                    }
-
-                    //Проверка на }
-                    else if (Regex.IsMatch(line, @"\s+\}\s*$"))
-                    {
-                        method.Body.Insert(i, "</body>");
-                        i++;
-                    }
+                        continue;
+                    }*/
 
                     else
+                    {
+                        methodTokens.Add(
+                            new TokenRecord(TokenType.Operation, line.Trim(), openBracketsCount));
                         continue;
+                    }
                 }
+                tokenizedMethods.Add(method.Name, methodTokens);
             }
 
-
-            return methods;
+            return tokenizedMethods;
         }
     }
 }

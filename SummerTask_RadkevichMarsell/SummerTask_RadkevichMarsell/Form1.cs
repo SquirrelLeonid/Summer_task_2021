@@ -43,7 +43,7 @@ namespace SummerTask_RadkevichMarsell
             }
 
             var tagPlacementor = new TagPlacementor();
-            methods = tagPlacementor.PlacementTags(methods);
+            tagPlacementor.PlacementTags(methods);
         }
 
         private List<Listing> ReadSelectedFiles(string[] selectedFiles)
