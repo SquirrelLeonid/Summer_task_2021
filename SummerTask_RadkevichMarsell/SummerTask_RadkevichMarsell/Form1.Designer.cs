@@ -29,78 +29,77 @@ namespace SummerTask_RadkevichMarsell
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_ChooseFiles = new System.Windows.Forms.Button();
-            this.TB_ChoosedFiles = new System.Windows.Forms.TextBox();
-            this.Btn_CreateScheme = new System.Windows.Forms.Button();
-            this.TB_Methods = new System.Windows.Forms.TextBox();
+            this.MenuStrip_topMenu = new System.Windows.Forms.MenuStrip();
+            this.ToolStripMenuItem_Create = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_BlockScheme = new System.Windows.Forms.ToolStripMenuItem();
+            this.SplitContainer_Workspace = new System.Windows.Forms.SplitContainer();
+            this.MenuStrip_topMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer_Workspace)).BeginInit();
+            this.SplitContainer_Workspace.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button_ChooseFiles
+            // MenuStrip_topMenu
             // 
-            this.button_ChooseFiles.AutoSize = true;
-            this.button_ChooseFiles.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button_ChooseFiles.Location = new System.Drawing.Point(0, 556);
-            this.button_ChooseFiles.Name = "button_ChooseFiles";
-            this.button_ChooseFiles.Size = new System.Drawing.Size(978, 47);
-            this.button_ChooseFiles.TabIndex = 0;
-            this.button_ChooseFiles.Text = "Выберите файл(ы)";
-            this.button_ChooseFiles.UseVisualStyleBackColor = true;
-            this.button_ChooseFiles.Click += new System.EventHandler(this.button_ChooseFiles_Click);
+            this.MenuStrip_topMenu.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.MenuStrip_topMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_Create});
+            this.MenuStrip_topMenu.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip_topMenu.Name = "MenuStrip_topMenu";
+            this.MenuStrip_topMenu.Size = new System.Drawing.Size(978, 24);
+            this.MenuStrip_topMenu.TabIndex = 4;
             // 
-            // TB_ChoosedFiles
+            // ToolStripMenuItem_Create
             // 
-            this.TB_ChoosedFiles.Location = new System.Drawing.Point(12, 20);
-            this.TB_ChoosedFiles.Multiline = true;
-            this.TB_ChoosedFiles.Name = "TB_ChoosedFiles";
-            this.TB_ChoosedFiles.ReadOnly = true;
-            this.TB_ChoosedFiles.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TB_ChoosedFiles.Size = new System.Drawing.Size(479, 278);
-            this.TB_ChoosedFiles.TabIndex = 1;
-            this.TB_ChoosedFiles.WordWrap = false;
+            this.ToolStripMenuItem_Create.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_BlockScheme});
+            this.ToolStripMenuItem_Create.Name = "ToolStripMenuItem_Create";
+            this.ToolStripMenuItem_Create.Size = new System.Drawing.Size(62, 20);
+            this.ToolStripMenuItem_Create.Text = "Создать";
             // 
-            // Btn_CreateScheme
+            // ToolStripMenuItem_BlockScheme
             // 
-            this.Btn_CreateScheme.Location = new System.Drawing.Point(12, 304);
-            this.Btn_CreateScheme.Name = "Btn_CreateScheme";
-            this.Btn_CreateScheme.Size = new System.Drawing.Size(479, 38);
-            this.Btn_CreateScheme.TabIndex = 2;
-            this.Btn_CreateScheme.Text = "Создать блок-схемы";
-            this.Btn_CreateScheme.UseVisualStyleBackColor = true;
-            this.Btn_CreateScheme.Click += new System.EventHandler(this.Btn_CreateScheme_Click);
+            this.ToolStripMenuItem_BlockScheme.Name = "ToolStripMenuItem_BlockScheme";
+            this.ToolStripMenuItem_BlockScheme.Size = new System.Drawing.Size(139, 22);
+            this.ToolStripMenuItem_BlockScheme.Text = "Блок-схему";
+            this.ToolStripMenuItem_BlockScheme.Click += new System.EventHandler(this.ToolStripMenuItem_BlockScheme_Click);
             // 
-            // TB_Methods
+            // SplitContainer_Workspace
             // 
-            this.TB_Methods.Location = new System.Drawing.Point(543, 20);
-            this.TB_Methods.Multiline = true;
-            this.TB_Methods.Name = "TB_Methods";
-            this.TB_Methods.ReadOnly = true;
-            this.TB_Methods.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TB_Methods.Size = new System.Drawing.Size(423, 278);
-            this.TB_Methods.TabIndex = 3;
-            this.TB_Methods.WordWrap = false;
+            this.SplitContainer_Workspace.Location = new System.Drawing.Point(0, 27);
+            this.SplitContainer_Workspace.Name = "SplitContainer_Workspace";
+            // 
+            // SplitContainer_Workspace.Panel1
+            // 
+            this.SplitContainer_Workspace.Panel1.AutoScroll = true;
+            this.SplitContainer_Workspace.Panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.SplitContainer_Workspace.Size = new System.Drawing.Size(978, 554);
+            this.SplitContainer_Workspace.SplitterDistance = 209;
+            this.SplitContainer_Workspace.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 603);
-            this.Controls.Add(this.TB_Methods);
-            this.Controls.Add(this.Btn_CreateScheme);
-            this.Controls.Add(this.TB_ChoosedFiles);
-            this.Controls.Add(this.button_ChooseFiles);
+            this.Controls.Add(this.SplitContainer_Workspace);
+            this.Controls.Add(this.MenuStrip_topMenu);
+            this.MainMenuStrip = this.MenuStrip_topMenu;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.MenuStrip_topMenu.ResumeLayout(false);
+            this.MenuStrip_topMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer_Workspace)).EndInit();
+            this.SplitContainer_Workspace.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button_ChooseFiles;
-        private System.Windows.Forms.TextBox TB_ChoosedFiles;
-        private System.Windows.Forms.Button Btn_CreateScheme;
-        private System.Windows.Forms.TextBox TB_Methods;
+        private System.Windows.Forms.MenuStrip MenuStrip_topMenu;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Create;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_BlockScheme;
+        private System.Windows.Forms.SplitContainer SplitContainer_Workspace;
     }
 }
 

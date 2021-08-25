@@ -14,12 +14,38 @@ namespace SummerTask_RadkevichMarsell
 {
     public partial class Form1 : Form
     {
+        private LineParser parser;
+        private Tokenizer tokenizer;
+
+        private Dictionary<Button, PictureBox> tabsAndSchemes;
+
         public Form1()
         {
             InitializeComponent();
+            parser = new LineParser();
+            tokenizer = new Tokenizer();
+
+            tabsAndSchemes = new Dictionary<Button, PictureBox>();
         }
 
-        private void button_ChooseFiles_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_BlockScheme_Click(object sender, EventArgs e)
+        {
+            var files = GetFileNames();
+            var listings = ReadSelectedFiles(files);
+            var methods = parser.ParseListings(listings);
+            var tokenizedMethods = tokenizer.Tokenize(methods);
+
+            foreach (var method in methods)
+            {
+                var tab = CreateMethodTab(method.Name);
+                var schemeWorkspace = CreateMethodSchemeWorkspace(method.Name);
+                SplitContainer_Workspace.Panel1.Controls.Add(tab);
+                tabsAndSchemes.Add(tab, schemeWorkspace);
+            }
+
+        }
+
+        private string[] GetFileNames()
         {
             var fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = true;
@@ -27,23 +53,9 @@ namespace SummerTask_RadkevichMarsell
             fileDialog.Filter = "Текстовые файлы (*.txt, *.cs)|*.txt;*.cs";
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
-                TB_ChoosedFiles.Lines = fileDialog.FileNames;      
-        }
+                return fileDialog.FileNames;
 
-        private void Btn_CreateScheme_Click(object sender, EventArgs e)
-        {
-            var listings = ReadSelectedFiles(TB_ChoosedFiles.Lines);
-            LineParser parser = new LineParser();
-            var methods = parser.ParseListings(listings);
-
-            foreach (MethodRecord record in methods)
-            {
-                TB_Methods.Text += record.Name;
-                TB_Methods.Text += "\r\n";
-            }
-
-            var tagPlacementor = new TagPlacementor();
-            tagPlacementor.PlacementTags(methods);
+            return new string[0];
         }
 
         private List<Listing> ReadSelectedFiles(string[] selectedFiles)
@@ -67,6 +79,42 @@ namespace SummerTask_RadkevichMarsell
             return listings;
         }
 
-        
+        private Button CreateMethodTab(string methodName)
+        {
+            var offsetX = 3;
+            var offsetY = 3;
+            var tabLength = 187;
+            var tabWidth = 40;
+            var textFontSize = 10;
+
+            var tab = new Button();
+            tab.Name = "Button_tab_" + methodName;
+            tab.Text = methodName;
+            tab.Font = new Font(FontFamily.GenericMonospace, textFontSize);
+            tab.BackColor = Color.White;
+            tab.Size = new Size(tabLength, tabWidth);
+            tab.Location = new Point(offsetX, offsetY + tabWidth * (SplitContainer_Workspace.Panel1.Controls.Count - 1));
+
+            tab.MouseClick += Tab_Click;
+
+            return tab;
+        }
+
+        private PictureBox CreateMethodSchemeWorkspace(string methodName)
+        {
+            var workspace = new PictureBox();
+
+            workspace.Dock = DockStyle.Fill;
+            workspace.BackColor = Color.Black;
+
+            return workspace;
+        }
+
+        private void Tab_Click(object sender, EventArgs e)
+        {
+            var tab = (Button)sender;
+            SplitContainer_Workspace.Panel2.Controls.Clear();
+            SplitContainer_Workspace.Panel2.Controls.Add(tabsAndSchemes[tab]);
+        }
     }
 }

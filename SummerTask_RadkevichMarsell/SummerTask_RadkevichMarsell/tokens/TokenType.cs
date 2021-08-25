@@ -6,6 +6,7 @@
         ForStatement,
         WhileStatement,
         DoStatement,
-        Operation
+        Operation,
+        DoWhileStatement
     }
 }
