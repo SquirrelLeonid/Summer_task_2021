@@ -13,5 +13,6 @@ namespace SummerTask_RadkevichMarsell.BlockTemplates
         OuterOperation,
         InputOutput,
         Delimeter
+
     }
 }
