@@ -8,10 +8,10 @@ using SummerTask_RadkevichMarsell.tokens;
 
 namespace SummerTask_RadkevichMarsell
 {
-    public class TagPlacementor
+    public class Tokenizer
     {
         private int openBracketsCount = 0;
-        public Dictionary<string, List<TokenRecord>> PlacementTags(List<MethodRecord> methods)
+        public Dictionary<string, List<TokenRecord>> Tokenize(List<MethodRecord> methods)
         {
             var tokenizedMethods = new Dictionary<string, List<TokenRecord>>();
 
@@ -66,16 +66,20 @@ namespace SummerTask_RadkevichMarsell
 
                     //Проверка на else
                     //Не обсудил как обрабатывать конструкцию if else-if
-                    /*else if (Regex.IsMatch(line, @"^\s+else\s*$"))
-                    {                      
+                    else if (Regex.IsMatch(line, @"^\s+else\s*$"))
+                    {
+                        methodTokens.Add(
+                            new TokenRecord(TokenType.IfElseBranch, string.Empty, openBracketsCount));
                         continue;
                     }
 
                     //Проверка на do
-                    else if (Regex.IsMatch(line, @"\s+do\s*"))
+                    else if (Regex.IsMatch(line, @"^\s+do\s*"))
                     {
+                        methodTokens.Add(
+                            new TokenRecord(TokenType.DoWhileStatement, string.Empty, openBracketsCount));
                         continue;
-                    }*/
+                    }
 
                     else
                     {
