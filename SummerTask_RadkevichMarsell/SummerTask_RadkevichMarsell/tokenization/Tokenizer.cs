@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using SummerTask_RadkevichMarsell.tokens;
+using SummerTask_RadkevichMarsell.fileProcessing;
 
-namespace SummerTask_RadkevichMarsell
+namespace SummerTask_RadkevichMarsell.tokenization
 {
     public class Tokenizer
     {
         private int openBracketsCount = 0;
+
         public Dictionary<string, List<TokenRecord>> Tokenize(List<MethodRecord> methods)
         {
             var tokenizedMethods = new Dictionary<string, List<TokenRecord>>();
@@ -18,6 +15,7 @@ namespace SummerTask_RadkevichMarsell
             foreach (var method in methods)
             {
                 var methodTokens = new List<TokenRecord>();
+
                 for (int i = 0; i < method.Body.Count; i++)
                 {
                     var line = method.Body[i];
@@ -88,6 +86,7 @@ namespace SummerTask_RadkevichMarsell
                         continue;
                     }
                 }
+
                 tokenizedMethods.Add(method.Name, methodTokens);
             }
 

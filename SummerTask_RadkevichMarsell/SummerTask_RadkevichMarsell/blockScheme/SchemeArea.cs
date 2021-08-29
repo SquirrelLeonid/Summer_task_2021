@@ -1,10 +1,9 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using SummerTask_RadkevichMarsell.tokens;
+using SummerTask_RadkevichMarsell.tokenization;
 
-namespace SummerTask_RadkevichMarsell
+namespace SummerTask_RadkevichMarsell.blockScheme
 {
     public class SchemeArea
     {
@@ -46,5 +45,6 @@ namespace SummerTask_RadkevichMarsell
                 graphics.DrawString(content, defaultFont, Brushes.Black, x, y, defaultStringFormat);
             }
         }
+
     }
 }

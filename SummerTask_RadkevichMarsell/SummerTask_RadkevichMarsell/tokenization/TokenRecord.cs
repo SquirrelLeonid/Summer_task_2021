@@ -1,4 +1,5 @@
-﻿namespace SummerTask_RadkevichMarsell.tokens
+﻿
+namespace SummerTask_RadkevichMarsell.tokenization
 {
     public class TokenRecord
     {
@@ -18,5 +19,6 @@
         {
             return this.Type.ToString();
         }
+
     }
 }

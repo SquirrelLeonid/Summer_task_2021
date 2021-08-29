@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace SummerTask_RadkevichMarsell.fileReading
+namespace SummerTask_RadkevichMarsell.fileProcessing
 {
     public class Listing
     {
@@ -16,5 +12,6 @@ namespace SummerTask_RadkevichMarsell.fileReading
             Name = name;
             Content = content;
         }
+
     }
 }

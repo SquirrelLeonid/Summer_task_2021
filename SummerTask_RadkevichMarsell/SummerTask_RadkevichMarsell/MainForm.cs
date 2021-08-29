@@ -4,22 +4,26 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using SummerTask_RadkevichMarsell.fileReading;
+
+using SummerTask_RadkevichMarsell.UI;
+using SummerTask_RadkevichMarsell.blockScheme;
+using SummerTask_RadkevichMarsell.tokenization;
+using SummerTask_RadkevichMarsell.fileProcessing;
 
 namespace SummerTask_RadkevichMarsell
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        private LineParser parser;
-        private Tokenizer tokenizer;
+        private LineParser Parser;
+        private Tokenizer Tokenizer;
         private PictureBox currentCanvas;
         private Dictionary<Button, SchemeArea> tabsAndSchemes;
 
-        public Form1()
+        public MainForm(LineParser parser, Tokenizer tokenizer)
         {
             InitializeComponent();
-            parser = new LineParser();
-            tokenizer = new Tokenizer();
+            Parser = parser;
+            Tokenizer = tokenizer;
             tabsAndSchemes = new Dictionary<Button, SchemeArea>();
         }
 
@@ -27,8 +31,8 @@ namespace SummerTask_RadkevichMarsell
         {
             var files = GetFileNames();
             var listings = ReadSelectedFiles(files);
-            var methods = parser.ParseListings(listings);
-            var tokenizedMethods = tokenizer.Tokenize(methods);
+            var methods = Parser.ParseListings(listings);
+            var tokenizedMethods = Tokenizer.Tokenize(methods);
 
             foreach (var methodEntry in tokenizedMethods)
             {
@@ -60,20 +64,25 @@ namespace SummerTask_RadkevichMarsell
         private List<Listing> ReadSelectedFiles(string[] selectedFiles)
         {
             var listings = new List<Listing>();
-            foreach (string file in selectedFiles)
+
+            foreach (var fileName in selectedFiles)
             {
                 var content = new List<string>();
-                using (StreamReader reader = new StreamReader(file, Encoding.UTF8))
+
+                using (var reader = new StreamReader(fileName, Encoding.UTF8))
                 {
-                    string line = reader.ReadLine();
+                    var line = reader.ReadLine();
+
                     while (line != null)
                     {
                         content.Add(line);
                         line = reader.ReadLine();
                     }
-                    listings.Add(new Listing(file, content));
+
+                    listings.Add(new Listing(fileName, content));
                 }
             }
+
             return listings;
         }
        
@@ -83,6 +92,7 @@ namespace SummerTask_RadkevichMarsell
             tab.Click += Tab_Click;
 
             SplitContainer_MainArea.Panel1.Controls.Add(tab);
+
             return tab;
         }
 
@@ -118,7 +128,6 @@ namespace SummerTask_RadkevichMarsell
 
             currentCanvas = tabsAndSchemes[tab].Canvas;
             currentCanvas.Show();
-
         }
     }
 }

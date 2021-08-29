@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using System.Drawing;
 
-namespace SummerTask_RadkevichMarsell
+namespace SummerTask_RadkevichMarsell.UI
 {
     public class MethodTab : Button
     {
@@ -21,14 +16,18 @@ namespace SummerTask_RadkevichMarsell
 
         public MethodTab(string methodName)
         {
-            this.Name = defaultNamePrefix + methodName;
-            this.Text = methodName;
-            this.Font = new Font(FontFamily.GenericMonospace, defaultFontSize);
-            this.BackColor = Color.White;
-            this.Size = new Size(defaultWidth, defaultHeight);
-            this.Location = new Point(defaultOffsetX, defaultOffsetY + this.Height * TabCounter);
-
+            InitializeFields(methodName);
             TabCounter++;
+        }
+
+        private void InitializeFields(string methodName)
+        {
+            Name = defaultNamePrefix + methodName;
+            Text = methodName;
+            Font = new Font(FontFamily.GenericMonospace, defaultFontSize);
+            BackColor = Color.White;
+            Size = new Size(defaultWidth, defaultHeight);
+            Location = new Point(defaultOffsetX, defaultOffsetY + Height * TabCounter);
         }
 
         protected override void Dispose(bool disposing)
@@ -36,5 +35,6 @@ namespace SummerTask_RadkevichMarsell
             TabCounter--;
             base.Dispose(disposing);
         }
+
     }
 }
