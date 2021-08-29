@@ -8,7 +8,8 @@ namespace SummerTask_RadkevichMarsell.BlockTemplates
 {
     public abstract class BlockTemplate
     {
-        private BlockType blockType;
-        private Size blockRectangleSize;
+        public BlockType Type { get; set; }
+        public Size RectangleSize { get; set; }
+        public string Content { get; set; }
     }
 }

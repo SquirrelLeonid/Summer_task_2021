@@ -1,6 +1,4 @@
-﻿using SummerTask_RadkevichMarsell.tokens;
-
-namespace SummerTask_RadkevichMarsell.tokens
+﻿namespace SummerTask_RadkevichMarsell.tokens
 {
     public class TokenRecord
     {
