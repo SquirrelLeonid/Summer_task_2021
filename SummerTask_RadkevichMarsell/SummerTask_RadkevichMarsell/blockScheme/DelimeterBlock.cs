@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
-namespace SummerTask_RadkevichMarsell.BlockTemplates
+namespace SummerTask_RadkevichMarsell.blockScheme
 {
     public class DelimeterBlock : BlockTemplate
     {
@@ -15,5 +10,6 @@ namespace SummerTask_RadkevichMarsell.BlockTemplates
             RectangleSize = rectangleSize;
             Content = content;
         }
+
     }
 }

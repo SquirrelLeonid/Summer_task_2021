@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using SummerTask_RadkevichMarsell.fileProcessing;
+using SummerTask_RadkevichMarsell.tokenization;
 
 namespace SummerTask_RadkevichMarsell
 {
@@ -16,7 +16,10 @@ namespace SummerTask_RadkevichMarsell
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var fileParser = new LineParser();
+            var tokenizer = new Tokenizer();
+            Application.Run(new MainForm(fileParser, tokenizer));
         }
     }
 }

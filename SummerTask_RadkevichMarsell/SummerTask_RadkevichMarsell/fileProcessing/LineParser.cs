@@ -1,22 +1,21 @@
-﻿using SummerTask_RadkevichMarsell.fileReading;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace SummerTask_RadkevichMarsell
+namespace SummerTask_RadkevichMarsell.fileProcessing
 {
     public class LineParser
     {
         private string currentNamespaceName;
         private string currentClassName;
         private string currentMethodName;
+
         public List<MethodRecord> ParseListings(List<Listing> listings)
         {
             var methods = new List<MethodRecord>();
             
-
             foreach (var listing in listings)
             {
                 currentNamespaceName = "";
@@ -24,7 +23,7 @@ namespace SummerTask_RadkevichMarsell
                 var methodFullName = new StringBuilder();
                 for (int i = 0; i < listing.Content.Count; i++)
                 {
-                    string line = listing.Content[i];
+                    var line = listing.Content[i];
 
                     if (line.Contains("namespace "))
                     {

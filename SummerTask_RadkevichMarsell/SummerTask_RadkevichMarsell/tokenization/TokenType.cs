@@ -1,4 +1,5 @@
-﻿namespace SummerTask_RadkevichMarsell.tokens
+﻿
+namespace SummerTask_RadkevichMarsell.tokenization
 {
     public enum TokenType
     {
@@ -9,4 +10,5 @@
         Operation,
         DoWhileStatement
     }
+
 }

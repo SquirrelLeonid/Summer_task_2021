@@ -46,30 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockSchemeCreator.cs" />
-    <Compile Include="BlockTemplates\BlockTemplate.cs" />
-    <Compile Include="BlockTemplates\BlockType.cs" />
-    <Compile Include="BlockTemplates\DelimeterBlock.cs" />
-    <Compile Include="fileReading\Listing.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="blockScheme\BlockTemplate.cs" />
+    <Compile Include="blockScheme\BlockType.cs" />
+    <Compile Include="blockScheme\DelimeterBlock.cs" />
+    <Compile Include="fileProcessing\Listing.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LineParser.cs" />
-    <Compile Include="MethodRecord.cs" />
-    <Compile Include="MethodTab.cs">
+    <Compile Include="fileProcessing\LineParser.cs" />
+    <Compile Include="fileProcessing\MethodRecord.cs" />
+    <Compile Include="UI\MethodTab.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchemeArea.cs" />
-    <Compile Include="Tokenizer.cs" />
-    <Compile Include="tokens\TokenRecord.cs" />
-    <Compile Include="tokens\TokenType.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="blockScheme\SchemeArea.cs" />
+    <Compile Include="tokenization\Tokenizer.cs" />
+    <Compile Include="tokenization\TokenRecord.cs" />
+    <Compile Include="tokenization\TokenType.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,5 +92,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
