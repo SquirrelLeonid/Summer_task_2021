@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using SummerTask_RadkevichMarsell.fileReading;
 
 namespace SummerTask_RadkevichMarsell
@@ -16,16 +12,15 @@ namespace SummerTask_RadkevichMarsell
     {
         private LineParser parser;
         private Tokenizer tokenizer;
-
-        private Dictionary<Button, PictureBox> tabsAndSchemes;
+        private PictureBox currentCanvas;
+        private Dictionary<Button, SchemeArea> tabsAndSchemes;
 
         public Form1()
         {
             InitializeComponent();
             parser = new LineParser();
             tokenizer = new Tokenizer();
-
-            tabsAndSchemes = new Dictionary<Button, PictureBox>();
+            tabsAndSchemes = new Dictionary<Button, SchemeArea>();
         }
 
         private void ToolStripMenuItem_BlockScheme_Click(object sender, EventArgs e)
@@ -35,14 +30,18 @@ namespace SummerTask_RadkevichMarsell
             var methods = parser.ParseListings(listings);
             var tokenizedMethods = tokenizer.Tokenize(methods);
 
-            foreach (var method in methods)
+            foreach (var methodEntry in tokenizedMethods)
             {
-                var tab = CreateMethodTab(method.Name);
-                var schemeWorkspace = CreateMethodSchemeWorkspace(method.Name);
-                SplitContainer_Workspace.Panel1.Controls.Add(tab);
-                tabsAndSchemes.Add(tab, schemeWorkspace);
-            }
+                var methodName = methodEntry.Key;
+                var methodTokens = methodEntry.Value;
 
+                var tab = CreateTab(methodName);
+                var schemeArea = CreateSchemeArea();                
+                                           
+                tabsAndSchemes.Add(tab, schemeArea);
+              
+                schemeArea.DrawBlocks(methodTokens);
+            }
         }
 
         private string[] GetFileNames()
@@ -75,46 +74,51 @@ namespace SummerTask_RadkevichMarsell
                     listings.Add(new Listing(file, content));
                 }
             }
-
             return listings;
         }
-
-        private Button CreateMethodTab(string methodName)
+       
+        private MethodTab CreateTab(string methodName)
         {
-            var offsetX = 3;
-            var offsetY = 3;
-            var tabLength = 187;
-            var tabWidth = 40;
-            var textFontSize = 10;
+            var tab = new MethodTab(methodName);
+            tab.Click += Tab_Click;
 
-            var tab = new Button();
-            tab.Name = "Button_tab_" + methodName;
-            tab.Text = methodName;
-            tab.Font = new Font(FontFamily.GenericMonospace, textFontSize);
-            tab.BackColor = Color.White;
-            tab.Size = new Size(tabLength, tabWidth);
-            tab.Location = new Point(offsetX, offsetY + tabWidth * (SplitContainer_Workspace.Panel1.Controls.Count - 1));
-
-            tab.MouseClick += Tab_Click;
-
+            SplitContainer_MainArea.Panel1.Controls.Add(tab);
             return tab;
         }
 
-        private PictureBox CreateMethodSchemeWorkspace(string methodName)
+        private SchemeArea CreateSchemeArea()
         {
-            var workspace = new PictureBox();
-
-            workspace.Dock = DockStyle.Fill;
-            workspace.BackColor = Color.Black;
-
-            return workspace;
+            var canvas = CreateCanvas();
+            var schemeArea = new SchemeArea(canvas);                                        
+            
+            return schemeArea;
         }
 
-        private void Tab_Click(object sender, EventArgs e)
+        private PictureBox CreateCanvas()
+        {
+            var canvas = new PictureBox();
+            var width = SplitContainer_MainArea.Panel2.Width;
+            var height = SplitContainer_MainArea.Panel2.Height;
+
+            canvas.Dock = DockStyle.Fill;
+            canvas.Image = new Bitmap(width, height);
+            canvas.Hide();
+
+            SplitContainer_MainArea.Panel2.Controls.Add(canvas);
+
+            return canvas;
+        }
+
+        public void Tab_Click(object sender, EventArgs e)
         {
             var tab = (Button)sender;
-            SplitContainer_Workspace.Panel2.Controls.Clear();
-            SplitContainer_Workspace.Panel2.Controls.Add(tabsAndSchemes[tab]);
+
+            if (currentCanvas != null)
+                currentCanvas.Hide();
+
+            currentCanvas = tabsAndSchemes[tab].Canvas;
+            currentCanvas.Show();
+
         }
     }
 }
