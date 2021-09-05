@@ -8,7 +8,6 @@ namespace SummerTask_RadkevichMarsell.tokenization
         WhileStatement,
         DoStatement,
         Operation,
-        DoWhileStatement
     }
 
 }

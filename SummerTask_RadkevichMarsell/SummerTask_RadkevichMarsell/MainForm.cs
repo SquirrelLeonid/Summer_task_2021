@@ -9,6 +9,7 @@ using SummerTask_RadkevichMarsell.UI;
 using SummerTask_RadkevichMarsell.blockScheme;
 using SummerTask_RadkevichMarsell.tokenization;
 using SummerTask_RadkevichMarsell.fileProcessing;
+using SummerTask_RadkevichMarsell.blockScheme.blocks;
 
 namespace SummerTask_RadkevichMarsell
 {

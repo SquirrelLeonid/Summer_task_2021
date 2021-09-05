@@ -46,9 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="blockScheme\BlockTemplate.cs" />
-    <Compile Include="blockScheme\BlockType.cs" />
-    <Compile Include="blockScheme\DelimeterBlock.cs" />
+    <Compile Include="blockScheme\BlockBlueprint.cs" />
+    <Compile Include="blockScheme\blocks\BlockTemplate.cs" />
+    <Compile Include="blockScheme\blocks\BlockType.cs" />
+    <Compile Include="blockScheme\blocks\DelimiterBlock.cs" />
+    <Compile Include="blockScheme\blocks\InnerOperationBlock.cs" />
+    <Compile Include="blockScheme\blocks\OperationBlock.cs" />
+    <Compile Include="blockScheme\blocks\OuterOperationBlock.cs" />
+    <Compile Include="blockScheme\blocks\ConditionBlock.cs" />
     <Compile Include="fileProcessing\Listing.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
