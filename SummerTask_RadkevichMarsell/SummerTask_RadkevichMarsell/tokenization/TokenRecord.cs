@@ -13,6 +13,7 @@ namespace SummerTask_RadkevichMarsell.tokenization
             Type = type;
             Value = value;
             Level = level;
+            
         }
 
         public override string ToString()

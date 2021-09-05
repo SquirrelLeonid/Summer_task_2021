@@ -1,11 +1,10 @@
-﻿namespace SummerTask_RadkevichMarsell.blockScheme
+﻿namespace SummerTask_RadkevichMarsell.blockScheme.blocks
 {
     public enum BlockType
     {
         Question,
         InnerOperation,
         OuterOperation,
-        InputOutput,
         Delimeter
     }
 }

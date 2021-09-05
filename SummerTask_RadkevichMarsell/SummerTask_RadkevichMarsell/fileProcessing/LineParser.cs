@@ -55,6 +55,12 @@ namespace SummerTask_RadkevichMarsell.fileProcessing
 
                         while (true)
                         {
+                            if (string.IsNullOrWhiteSpace(listing.Content[i]))
+                            {
+                                i++;
+                                continue;
+                            }
+
                             line = listing.Content[i];
 
                             if (line.Contains("{"))

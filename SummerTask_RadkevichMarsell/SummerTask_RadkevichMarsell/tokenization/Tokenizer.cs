@@ -71,14 +71,6 @@ namespace SummerTask_RadkevichMarsell.tokenization
                         continue;
                     }
 
-                    //Проверка на do
-                    else if (Regex.IsMatch(line, @"^\s+do\s*"))
-                    {
-                        methodTokens.Add(
-                            new TokenRecord(TokenType.DoWhileStatement, string.Empty, openBracketsCount));
-                        continue;
-                    }
-
                     else
                     {
                         methodTokens.Add(
