@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using SummerTask_RadkevichMarsell.tokenization;
+using SummerTask_RadkevichMarsell.tokenization.tokens;
 using SummerTask_RadkevichMarsell.blockScheme.blocks;
 
 namespace SummerTask_RadkevichMarsell.blockScheme
@@ -17,20 +17,26 @@ namespace SummerTask_RadkevichMarsell.blockScheme
             Content = new List<BlockBlueprint>();
         }
 
-        public void DrawBlocks(List<TokenRecord> methodTokens)
-        {
-            
-            foreach (var token in methodTokens)
-            {
-                switch (token.Type)
-                {
-                    case TokenType.Operation:
-                        break;
-                    default:
-                        break;
-                }
-            }
+        public void DrawBlocks(BlockTemplate[] blocks)
+        {                
             Canvas.Refresh();
+        }
+
+        private Label CreateTextRectangle(string text)
+        {
+            var textRectangle = new Label();
+
+            Canvas.Controls.Add(textRectangle);
+            Content.Add(null);
+
+            textRectangle.AutoSize = true;
+            textRectangle.Text = text;
+            textRectangle.Font = new Font(FontFamily.GenericSansSerif, 12);
+            textRectangle.Location = new Point(100, 10 + (textRectangle.Height + 20) * Content.Count);
+            textRectangle.BorderStyle = BorderStyle.FixedSingle;
+            textRectangle.Visible = true;
+
+            return textRectangle;
         }
     }
 }

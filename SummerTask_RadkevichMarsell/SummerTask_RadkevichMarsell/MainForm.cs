@@ -9,7 +9,6 @@ using SummerTask_RadkevichMarsell.UI;
 using SummerTask_RadkevichMarsell.blockScheme;
 using SummerTask_RadkevichMarsell.tokenization;
 using SummerTask_RadkevichMarsell.fileProcessing;
-using SummerTask_RadkevichMarsell.blockScheme.blocks;
 
 namespace SummerTask_RadkevichMarsell
 {
@@ -17,14 +16,16 @@ namespace SummerTask_RadkevichMarsell
     {
         private LineParser Parser;
         private Tokenizer Tokenizer;
+        private BlockBuilder BlockBuilder;
         private PictureBox currentCanvas;
         private Dictionary<Button, SchemeArea> tabsAndSchemes;
 
-        public MainForm(LineParser parser, Tokenizer tokenizer)
+        public MainForm(LineParser parser, Tokenizer tokenizer, BlockBuilder builder)
         {
             InitializeComponent();
             Parser = parser;
             Tokenizer = tokenizer;
+            BlockBuilder = builder;
             tabsAndSchemes = new Dictionary<Button, SchemeArea>();
         }
 
@@ -44,8 +45,9 @@ namespace SummerTask_RadkevichMarsell
                 var schemeArea = CreateSchemeArea();                
                                            
                 tabsAndSchemes.Add(tab, schemeArea);
-              
-                schemeArea.DrawBlocks(methodTokens);
+
+                var methodBlocks = BlockBuilder.Build(methodTokens);
+                schemeArea.DrawBlocks(methodBlocks);
             }
         }
 
