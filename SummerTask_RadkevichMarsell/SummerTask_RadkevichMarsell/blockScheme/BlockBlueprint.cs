@@ -4,16 +4,16 @@ using SummerTask_RadkevichMarsell.blockScheme.blocks;
 
 namespace SummerTask_RadkevichMarsell.blockScheme
 {
-    class BlockBlueprint
+    public class BlockBlueprint
     {
-        Point BlueprintLocation { get; }
-        int BlueprintWidth { get; }
-        int BlueprintHeight { get; }
+        public Point BlueprintLocation { get; }
+        public int BlueprintWidth { get; }
+        public int BlueprintHeight { get; }
 
-        Label TextRectangle { get; }
-        BlockTemplate Block { get; }
+        public Label TextRectangle { get; }
+        public BlockTemplate Block { get; }
 
-        BlockBlueprint (BlockTemplate block)
+        public BlockBlueprint (BlockTemplate block)
         {
             Block = block;
             TextRectangle = CreateRectangleFromText(Block.Content);

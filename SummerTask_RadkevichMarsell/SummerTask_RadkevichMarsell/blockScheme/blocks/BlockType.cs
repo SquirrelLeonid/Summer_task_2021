@@ -3,8 +3,7 @@
     public enum BlockType
     {
         Question,
-        InnerOperation,
-        OuterOperation,
-        Delimeter
+        Operation,
+        StartEnd
     }
 }

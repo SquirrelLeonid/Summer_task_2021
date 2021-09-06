@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using SummerTask_RadkevichMarsell.fileProcessing;
 using SummerTask_RadkevichMarsell.tokenization;
+using SummerTask_RadkevichMarsell.blockScheme;
 
 namespace SummerTask_RadkevichMarsell
 {
@@ -19,7 +20,8 @@ namespace SummerTask_RadkevichMarsell
 
             var fileParser = new LineParser();
             var tokenizer = new Tokenizer();
-            Application.Run(new MainForm(fileParser, tokenizer));
+            var builder = new BlockBuilder();
+            Application.Run(new MainForm(fileParser, tokenizer, builder));
         }
     }
 }

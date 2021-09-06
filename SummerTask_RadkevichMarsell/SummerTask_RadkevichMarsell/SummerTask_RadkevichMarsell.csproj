@@ -47,13 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="blockScheme\BlockBlueprint.cs" />
+    <Compile Include="blockScheme\BlockBuilder.cs" />
+    <Compile Include="blockScheme\Links\BaseLink.cs" />
     <Compile Include="blockScheme\blocks\BlockTemplate.cs" />
     <Compile Include="blockScheme\blocks\BlockType.cs" />
-    <Compile Include="blockScheme\blocks\DelimiterBlock.cs" />
-    <Compile Include="blockScheme\blocks\InnerOperationBlock.cs" />
-    <Compile Include="blockScheme\blocks\OperationBlock.cs" />
-    <Compile Include="blockScheme\blocks\OuterOperationBlock.cs" />
-    <Compile Include="blockScheme\blocks\ConditionBlock.cs" />
+    <Compile Include="blockScheme\Links\FalseLink.cs" />
+    <Compile Include="blockScheme\Links\Link.cs" />
+    <Compile Include="blockScheme\Links\TrueLink.cs" />
     <Compile Include="fileProcessing\Listing.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -63,6 +63,13 @@
     </Compile>
     <Compile Include="fileProcessing\LineParser.cs" />
     <Compile Include="fileProcessing\MethodRecord.cs" />
+    <Compile Include="tokenization\tokens\ElseToken.cs" />
+    <Compile Include="tokenization\tokens\Expression.cs" />
+    <Compile Include="tokenization\tokens\ForToken.cs" />
+    <Compile Include="tokenization\tokens\IfToken.cs" />
+    <Compile Include="tokenization\tokens\OperationToken.cs" />
+    <Compile Include="tokenization\tokens\StartEndToken.cs" />
+    <Compile Include="tokenization\tokens\WhileToken.cs" />
     <Compile Include="UI\MethodTab.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -70,8 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="blockScheme\SchemeArea.cs" />
     <Compile Include="tokenization\Tokenizer.cs" />
-    <Compile Include="tokenization\TokenRecord.cs" />
-    <Compile Include="tokenization\TokenType.cs" />
+    <Compile Include="tokenization\tokens\TokenRecord.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
