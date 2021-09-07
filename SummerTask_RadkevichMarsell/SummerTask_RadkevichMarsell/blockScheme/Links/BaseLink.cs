@@ -17,5 +17,10 @@ namespace SummerTask_RadkevichMarsell.blockScheme.Links
             From = from;
             To = to;
         }
+
+        public override string ToString()
+        {
+            return "From " + From.ToString() + " TO " + To.ToString();
+        }
     }
 }

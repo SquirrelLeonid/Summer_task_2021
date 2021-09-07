@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="blockScheme\BlockBlueprint.cs" />
+    <Compile Include="blockScheme\BlockBlueprint.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="blockScheme\BlockBuilder.cs" />
     <Compile Include="blockScheme\Links\BaseLink.cs" />
     <Compile Include="blockScheme\blocks\BlockTemplate.cs" />
@@ -54,6 +56,15 @@
     <Compile Include="blockScheme\Links\FalseLink.cs" />
     <Compile Include="blockScheme\Links\Link.cs" />
     <Compile Include="blockScheme\Links\TrueLink.cs" />
+    <Compile Include="blockScheme\OperationBlueprint.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="blockScheme\QuestionBlueprint.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="blockScheme\StartEndBlueprint.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="fileProcessing\Listing.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

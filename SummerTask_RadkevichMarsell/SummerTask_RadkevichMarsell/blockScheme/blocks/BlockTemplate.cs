@@ -19,5 +19,9 @@ namespace SummerTask_RadkevichMarsell.blockScheme.blocks
         {
             Links = links;
         }
+        public override string ToString()
+        {
+            return Type.ToString() + " " + Content;
+        }
     }
 }
