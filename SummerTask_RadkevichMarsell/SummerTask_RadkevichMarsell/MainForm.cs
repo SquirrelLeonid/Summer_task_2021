@@ -113,8 +113,9 @@ namespace SummerTask_RadkevichMarsell
             var width = SplitContainer_MainArea.Panel2.Width;
             var height = SplitContainer_MainArea.Panel2.Height;
 
+            canvas.Size = new Size(width, height);
             canvas.Dock = DockStyle.Fill;
-            canvas.Image = new Bitmap(width, height);
+            canvas.BackColor = Color.White;
             canvas.Hide();
 
             SplitContainer_MainArea.Panel2.Controls.Add(canvas);
@@ -131,6 +132,11 @@ namespace SummerTask_RadkevichMarsell
 
             currentCanvas = tabsAndSchemes[tab].Canvas;
             currentCanvas.Show();
+        }
+
+        private void Button_ResetCanvasLocation_Click(object sender, EventArgs e)
+        {
+            currentCanvas.Location = new Point(0, 0);
         }
     }
 }

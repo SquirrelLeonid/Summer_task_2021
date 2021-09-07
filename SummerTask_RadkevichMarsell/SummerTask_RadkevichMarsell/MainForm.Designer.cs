@@ -65,18 +65,19 @@ namespace SummerTask_RadkevichMarsell
             // 
             // SplitContainer_MainArea
             // 
-            this.SplitContainer_MainArea.Location = new System.Drawing.Point(0, 27);
+            this.SplitContainer_MainArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SplitContainer_MainArea.Location = new System.Drawing.Point(0, 24);
             this.SplitContainer_MainArea.Name = "SplitContainer_MainArea";
             // 
             // SplitContainer_MainArea.Panel1
             // 
             this.SplitContainer_MainArea.Panel1.AutoScroll = true;
             this.SplitContainer_MainArea.Panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.SplitContainer_MainArea.Size = new System.Drawing.Size(978, 554);
+            this.SplitContainer_MainArea.Size = new System.Drawing.Size(978, 579);
             this.SplitContainer_MainArea.SplitterDistance = 209;
             this.SplitContainer_MainArea.TabIndex = 5;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,7 +85,7 @@ namespace SummerTask_RadkevichMarsell
             this.Controls.Add(this.SplitContainer_MainArea);
             this.Controls.Add(this.MenuStrip_topMenu);
             this.MainMenuStrip = this.MenuStrip_topMenu;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.MenuStrip_topMenu.ResumeLayout(false);
             this.MenuStrip_topMenu.PerformLayout();

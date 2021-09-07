@@ -28,7 +28,7 @@ namespace SummerTask_RadkevichMarsell.tokenization
             var result = new List<TokenRecord>();
             var tokenStack = new Stack<TokenRecord>();
 
-            var currentToken = (TokenRecord)(new StartEndToken("Start"));
+            var currentToken = (TokenRecord)(new StartEndToken(method.Name));
 
             result.Add(currentToken);
 
@@ -59,7 +59,7 @@ namespace SummerTask_RadkevichMarsell.tokenization
                     var forParts = forStatement.Split(new char[] { ';' });
 
                     var initialization = forParts[0];
-                    var condition = forParts[1];
+                    var condition = forParts[1] +"?";
                     var iteration = forParts[2];
 
                     currentToken = new ForToken(initialization, condition, iteration);                   
@@ -76,7 +76,7 @@ namespace SummerTask_RadkevichMarsell.tokenization
                 else if (Regex.IsMatch(line, @"^\s+if\s*\(.*\)$"))
                 {
                     var condition = GetConditionInBrackets(line);
-                    currentToken = new IfToken(condition);
+                    currentToken = new IfToken(condition + "?");
                 }
 
                 //Проверка на else
@@ -87,7 +87,7 @@ namespace SummerTask_RadkevichMarsell.tokenization
                 else
                 {
                     var text = line.Trim();
-                    currentToken = new OperationToken(text);
+                    currentToken = new OperationToken(text.Substring(0,text.Length - 1));
                 }
 
                 if (!tokenStack.Any())
@@ -96,7 +96,7 @@ namespace SummerTask_RadkevichMarsell.tokenization
                     tokenStack.Peek().InnerTokens.Add(currentToken);
             }
 
-            var endToken = new StartEndToken("End");
+            var endToken = new StartEndToken(method.Name);
             result.Add(endToken);
 
             TokenizedMethods.Add(method.Name, result);

@@ -1,34 +1,54 @@
 ﻿using System.Windows.Forms;
-using System.Drawing;
+using System;
 using SummerTask_RadkevichMarsell.blockScheme.blocks;
+using System.Drawing;
 
 namespace SummerTask_RadkevichMarsell.blockScheme
 {
-    public class BlockBlueprint
+    public class BlockBlueprint : PictureBox
     {
-        public Point BlueprintLocation { get; }
-        public int BlueprintWidth { get; }
-        public int BlueprintHeight { get; }
+        protected static readonly Font defaultFont = new Font(FontFamily.GenericSerif, 14);
+        protected static readonly Color defaultBackColor = Color.Transparent;
+        protected static readonly Pen defaultPen = new Pen(Color.Black, 2);
 
-        public Label TextRectangle { get; }
-        public BlockTemplate Block { get; }
+        public BlockTemplate Block { get; set; }
+        public Point TopInput { get; set; } 
+        public Point LeftInput { get; set; }
+        public Point DownOutput { get; set; }
+        public Point RightOutput { get; set; }
 
-        public BlockBlueprint (BlockTemplate block)
+        protected BlockBlueprint(BlockTemplate block) : base()
         {
             Block = block;
-            TextRectangle = CreateRectangleFromText(Block.Content);
         }
 
-        private Label CreateRectangleFromText(string content)
+        public virtual void ConfigureTextArea(Label area, string text)
         {
-            var rectangle = new Label();
+            Controls.Add(area);
+            area.AutoSize = true;
+            area.Text = text;
+            area.Font = defaultFont;
 
-            rectangle.AutoSize = true;
-            rectangle.Enabled = true;
-            rectangle.BackColor = Color.White;
-            rectangle.Text = content;          
+            int x = (Size.Width - area.Width) / 2;
+            int y = (Size.Height - area.Height) / 2;
+            area.Location = new Point(x, y);
 
-            return rectangle;
+            area.Visible = true;
         }
+
+        public virtual void SetLocation(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void SetLocation(Point newLocation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void Draw()
+        {
+            throw new NotImplementedException();
+        }       
     }
 }
