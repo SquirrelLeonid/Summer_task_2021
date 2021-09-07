@@ -23,6 +23,7 @@ namespace SummerTask_RadkevichMarsell
         public MainForm(LineParser parser, Tokenizer tokenizer, BlockBuilder builder)
         {
             InitializeComponent();
+            
             Parser = parser;
             Tokenizer = tokenizer;
             BlockBuilder = builder;
@@ -113,8 +114,7 @@ namespace SummerTask_RadkevichMarsell
             var width = SplitContainer_MainArea.Panel2.Width;
             var height = SplitContainer_MainArea.Panel2.Height;
 
-            canvas.Size = new Size(width, height);
-            canvas.Dock = DockStyle.Fill;
+            canvas.Size = new Size(width, height);          
             canvas.BackColor = Color.White;
             canvas.Hide();
 
